@@ -1,0 +1,30 @@
+[workspace]
+name = "cog-qwen"
+version = "0.1.0"
+description = "Pinned Qwen3-4B local model provider with explicit host admission."
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[dependencies]
+python = ">=3.11,<3.15"
+pyyaml = "*"
+jsonschema = "*"
+"llama.cpp" = "*"
+
+[tasks]
+fetch = "python scripts/model.py fetch"
+serve-model = "python scripts/model.py serve"
+model-check = "python scripts/model.py check"
+card = "python src/cli.py card"
+check = "python src/cli.py check"
+models = "python src/cli.py models"
+bind = "python src/cli.py bind"
+admit = "python src/cli.py admit"
+inspect-binding = "python src/cli.py inspect-binding"
+revoke = "python src/cli.py revoke"
+serve = "python src/cli.py serve"
+infer = "python src/cli.py infer"
+test = "python -m unittest discover -s tests -v"
+
+[tool.nebi.bundle]
+exclude = ["models/**", "state/**", "*.gguf", ".env", "__pycache__/**", "*.pyc"]

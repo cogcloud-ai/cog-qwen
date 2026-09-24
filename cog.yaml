@@ -1,0 +1,47 @@
+schema: openteams/cog-manifest [0.1]
+id: openteams/cog-qwen
+version: "0.1.0"
+summary: Qwen3-4B Q4_K_M, pinned weights and llama.cpp, served locally.
+owner: maintainers@openteams.com
+license: Apache-2.0
+kind: model
+locality: local
+memory: none
+model:
+  name: Qwen3-4B
+  quantization: Q4_K_M
+  runtime: llama.cpp
+  weights:
+    source: https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/bc640142c66e1fdd12af0bd68f40445458f3869b/Qwen3-4B-Q4_K_M.gguf
+    sha256: 7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5
+prohibits: [agent_tool_execution, silent_model_substitution, self_admission, credential_export]
+requires: []
+provides: [model-endpoint/openai-compatible, model-artifact/gguf]
+io:
+  accepts: [model_binding_request, chat_completion_request]
+  produces: [candidate_binding, chat_completion]
+extensions:
+  workbench_host:
+    contract: openteams/workbench-host [0.1-draft]
+    tasks: {admit: admit, inspect: inspect-binding, revoke: revoke}
+  satisfier_binding:
+    contract: openteams/satisfier-binding [0.1-draft]
+    declaration: binding/provider.json
+interfaces:
+- name: web-api
+  kind: openai-compatible
+  task: serve-model
+  endpoint: http://127.0.0.1:8080/v1
+  served_model_id: qwen3-4b-q4_k_m
+  api_key_env: COG_QWEN_BACKEND_TOKEN
+  audience: usage
+  default: true
+- {name: gateway, kind: http-json, task: serve, audience: usage, endpoint: 'http://127.0.0.1:8114'}
+- {name: bind, kind: command, task: bind, audience: lifecycle}
+- {name: catalog, kind: command, task: models, audience: lifecycle}
+- {name: fetch, kind: command, task: fetch, audience: lifecycle}
+- {name: model-check, kind: command, task: model-check, audience: lifecycle}
+- {name: health, kind: command, task: check, audience: lifecycle}
+- {name: card, kind: command, task: card, audience: lifecycle}
+evaluation:
+  tests: [tests/test_provider.py]

@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-24",
+  "model_id": "qwen3-4b-q4_k_m",
+  "artifact": {
+    "model_id": "qwen3-4b-q4_k_m",
+    "repository": "Qwen/Qwen3-4B-GGUF",
+    "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+    "filename": "Qwen3-4B-Q4_K_M.gguf",
+    "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5",
+    "size": 2497280256,
+    "license": "Apache-2.0"
+  },
+  "runtime": "version: 0.3.0-dev (build 0, commit unknown)\nbuilt with Clang 21.1.8 for Darwin arm64",
+  "checks": [
+    "artifact checksum",
+    "backend authentication",
+    "native resolver dry run",
+    "candidate and independent host probe",
+    "local model and harness admission",
+    "author composition",
+    "live structured JSON turn",
+    "gateway revocation"
+  ],
+  "result": "passed",
+  "quality_scope": "Synthetic transport/JSON qualification only; no builder quality claim."
+}

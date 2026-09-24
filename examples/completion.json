@@ -1,0 +1,13 @@
+{
+  "model": "qwen3-4b-q4_k_m",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Return a JSON object with the key ok set to true."
+    }
+  ],
+  "response_format": {
+    "type": "json_object"
+  },
+  "max_tokens": 64
+}
