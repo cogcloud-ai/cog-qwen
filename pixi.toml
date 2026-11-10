@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Pinned Qwen3-4B local model provider with explicit host admission."
 channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
+requires-pixi = ">=0.82.1"
 
 [dependencies]
 python = ">=3.11,<3.15"
